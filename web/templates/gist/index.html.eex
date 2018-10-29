@@ -1,0 +1,19 @@
+<h4>Gists</h4>
+
+<ul>
+  <%= for gist <- @gists do %>
+    <li>
+      <%= gist.title %>
+      <div>
+      <%= link "Edit", to: gist_path(@conn, :edit, gist) %>
+      <%= link "Delete", to: gist_path(@conn, :delete, gist), method: :delete %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<div>
+  <%= link to: gist_path(@conn, :new) do %>
+    Create Gist
+  <% end %>
+</div>

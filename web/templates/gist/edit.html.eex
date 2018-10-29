@@ -1,0 +1,8 @@
+<%= form_for @changeset, gist_path(@conn, :update, @gist), fn f -> %>
+  <div>
+    <%= text_input f, :title, placeholder: "Title" %>
+    <%= error_tag f, :title%>
+  </div>
+
+  <%= submit "Save Gist" %>
+<% end %>

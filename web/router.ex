@@ -22,7 +22,7 @@ defmodule Gist.Router do
     # get "/gists/:id/edit", GistController, :edit
     # put "/gists/:id", GistController, :update
 
-    resources "/", TopicController
+    resources "/", GistController
   end
 
   # Other scopes may use custom stacks.

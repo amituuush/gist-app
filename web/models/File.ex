@@ -1,9 +1,10 @@
-defmodule Gist.Gist do
+defmodule Gist.File do
   use Gist.Web, :model
 
-  schema "gist" do
-    field :title, :string
-    field :description, :string
+  schema "file" do
+    field :name, :string
+    field :language, :string
+    field :body, :string
   end
 
   # struct represents a record in the db that we want to save

@@ -4,6 +4,12 @@ defmodule Gist.Gist do
   schema "gist" do
     field :title, :string
     field :description, :string
+    field :body, :string
+
+    belongs_to :user, Gist.Gist
+    has_many :file, Gist.File
+
+    timestamps()
   end
 
   # struct represents a record in the db that we want to save
@@ -16,5 +22,7 @@ defmodule Gist.Gist do
     # inspect props of changeset and determines if it's valid, and then returns a changeset
     |> validate_required([:title])
     # what is returns is the changeset that represents what we want to update the db with
+    |> assoc_constraint(:user)
+
   end
 end

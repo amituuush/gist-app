@@ -2,9 +2,14 @@ defmodule Gist.User do
   use Gist.Web, :model
 
   schema "user" do
-    field :username, :string
+    field :username, :string, null: false
     field :email, :string
-    field :password, :string
+    field :password, :string, virtual: true
+    field :password_hash, :string, virtual: true
+
+    has_many :gist, Gist.Gist
+
+    timestamps()
   end
 
   # struct represents a record in the db that we want to save

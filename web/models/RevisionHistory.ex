@@ -1,12 +1,12 @@
-defmodule Gist.File do
+defmodule Gist.RevisionHistory do
   use Gist.Web, :model
 
-  schema "file" do
-    field :name, :string
-    field :language, :string
-    field :body, :string
+  schema "revisionHistory" do
+    # field :name, :string
+    # field :language, :string
+    # field :body, :string
 
-    belongs_to :gist, Gist.Gist
+    # belongs_to :gist, Gist.Gist
   end
 
   # struct represents a record in the db that we want to save

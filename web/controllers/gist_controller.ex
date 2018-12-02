@@ -6,8 +6,10 @@ defmodule Gist.GistController do
 
   def index(conn, _params) do
     gists = Repo.all(Gist)
+    # gists = []
 
-    render conn, "index.html", gists: gists
+    json conn, gists
+    # render conn, "index.html", gists: gists
   end
 
   def new(conn, _params) do
@@ -30,34 +32,34 @@ defmodule Gist.GistController do
     end
   end
 
-  def edit(conn, %{"id" => gist_id}) do
-    gist = Repo.get(Gist, gist_id)
-    changeset = Gist.changeset(gist)
+  # def edit(conn, %{"id" => gist_id}) do
+  #   gist = Repo.get(Gist, gist_id)
+  #   changeset = Gist.changeset(gist)
 
-    render conn, "edit.html", changeset: changeset, gist: gist
-  end
+  #   render conn, "edit.html", changeset: changeset, gist: gist
+  # end
 
-  def update(conn, %{"id" => gist_id, "gist" => gist}) do
-    old_gist = Repo.get(gist_id)
-    changeset = Gist.changeset(old_gist, gist)
+  # def update(conn, %{"id" => gist_id, "gist" => gist}) do
+  #   old_gist = Repo.get(gist_id)
+  #   changeset = Gist.changeset(old_gist, gist)
 
-      # changeset contains the id of the gist and the updated gist title
-      case Repo.update(changeset) do
-        {:ok, _gist} ->
-          conn
-          |> put_flash(:info, "Gist Updated")
-          |> redirect(to: gist_path(conn, :index))
+  #     # changeset contains the id of the gist and the updated gist title
+  #     case Repo.update(changeset) do
+  #       {:ok, _gist} ->
+  #         conn
+  #         |> put_flash(:info, "Gist Updated")
+  #         |> redirect(to: gist_path(conn, :index))
 
-        {:error, changeset} ->
-          render conn, "edit.html", changeset: changeset, gist: old_gist
-      end
-  end
+  #       {:error, changeset} ->
+  #         render conn, "edit.html", changeset: changeset, gist: old_gist
+  #     end
+  # end
 
-  def delete(conn, %{"id" => gist_id}) do
-    Repo.get!(Gist, gist_id) |> Repo.delete!
+  # def delete(conn, %{"id" => gist_id}) do
+  #   Repo.get!(Gist, gist_id) |> Repo.delete!
 
-    conn
-    |> put_flash(:info, "Gist Deleted")
-    |> redirect(to: gist_path(conn, :index))
-  end
+  #   conn
+  #   |> put_flash(:info, "Gist Deleted")
+  #   |> redirect(to: gist_path(conn, :index))
+  # end
 end

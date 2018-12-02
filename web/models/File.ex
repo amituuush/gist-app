@@ -4,7 +4,7 @@ defmodule Gist.File do
   schema "file" do
     field :name, :string
     field :language, :string
-    field :body, :string
+    # field :body, :string
 
     belongs_to :gist, Gist.Gist
   end
@@ -21,3 +21,6 @@ defmodule Gist.File do
     # what is returns is the changeset that represents what we want to update the db with
   end
 end
+
+# file_version: file_id, file_version | files that don't change will reference the same version
+# version: version_id, gist_id, created_on, prior_version_id

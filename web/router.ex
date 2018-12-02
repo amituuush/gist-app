@@ -13,6 +13,12 @@ defmodule Gist.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", Gist do
+    pipe_through :api
+
+    get "/", GistController, :index
+  end
+
   scope "/", Gist do
     pipe_through :browser # Use the default browser stack
 
@@ -25,8 +31,4 @@ defmodule Gist.Router do
     resources "/", GistController
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Gist do
-  #   pipe_through :api
-  # end
 end

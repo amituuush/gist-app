@@ -1,13 +1,15 @@
 defmodule Gist.Gist do
   use Gist.Web, :model
 
+  # @timestamps_opts [type: :utc_datetime, usec: true]
+  # @primary_key {:uuid, :binary_id, [autogenerate: true]}
+
   schema "gist" do
     field :title, :string
     field :description, :string
-    field :body, :string
 
-    belongs_to :user, Gist.Gist
-    has_many :file, Gist.File
+    # belongs_to :user, Gist.Gist
+    # has_many :file, Gist.File
 
     timestamps()
   end
@@ -18,11 +20,10 @@ defmodule Gist.Gist do
   def changeset(struct, params \\ %{}) do
     struct
     # case produces a changeset which is how we want to update the db
-    |> cast(params, [:title])
+    |> cast(params, [:title, :description, :created_at, :uuid])
     # inspect props of changeset and determines if it's valid, and then returns a changeset
-    |> validate_required([:title])
-    # what is returns is the changeset that represents what we want to update the db with
-    |> assoc_constraint(:user)
-
+    |> validate_required([:title, :description, :created_at])
+    # what is returned is the changeset that represents what we want to update the db with
+    # |> assoc_constraint(:user)
   end
 end

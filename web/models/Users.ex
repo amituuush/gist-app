@@ -1,13 +1,14 @@
-defmodule Gist.User do
+defmodule Gist.Users do
   use Gist.Web, :model
 
-  schema "user" do
+  schema "users" do
+    field :user_id, :string, null: false, virtual: true
     field :username, :string, null: false
-    field :email, :string
+    field :email, :string, null: false
     field :password, :string, virtual: true
     field :password_hash, :string, virtual: true
 
-    has_many :gist, Gist.Gist
+    has_many :gists, Gist.Gists
 
     timestamps()
   end
@@ -19,6 +20,7 @@ defmodule Gist.User do
     struct
     # case produces a changeset which is how we want to update the db
     |> cast(params, [:title])
+    |> unique_constraint([:user_id, :username, :email], name: :user_id_index)
     # inspect props of changeset and determines if it's valid, and then returns a changeset
     |> validate_required([:title])
     # what is returns is the changeset that represents what we want to update the db with

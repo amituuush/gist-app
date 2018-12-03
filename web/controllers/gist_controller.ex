@@ -1,36 +1,36 @@
 defmodule Gist.GistController do
   use Gist.Web, :controller
 
-  alias Gist.Gist
+  alias Gist.Gists
   # conn contains all info from the request (headers, body, cookies ,etc) and is what we respond with to the client
 
   def index(conn, _params) do
-    gists = Repo.all(Gist)
+    gists = Repo.all(Gists)
     # gists = []
 
     json conn, gists
     # render conn, "index.html", gists: gists
   end
 
-  def new(conn, _params) do
-    changeset = Gist.changeset(%Gist{}, %{})
+  # def new(conn, _params) do
+  #   changeset = Gist.changeset(%Gist{}, %{})
 
-    render conn, "new.html", changeset: changeset
-  end
+  #   render conn, "new.html", changeset: changeset
+  # end
 
-  def create(conn, %{"gist" => gist}) do
-    changeset = Gist.changeset(%Gist{}, gist)
+  # def create(conn, %{"gist" => gist}) do
+  #   changeset = Gist.changeset(%Gist{}, gist)
 
-    case Repo.insert(changeset) do
-      {:ok, _gist} ->
-        conn
-        |> put_flash(:info, "Gist Created")
-        |> redirect(to: gist_path(conn, :index))
+  #   case Repo.insert(changeset) do
+  #     {:ok, _gist} ->
+  #       conn
+  #       |> put_flash(:info, "Gist Created")
+  #       |> redirect(to: gist_path(conn, :index))
 
-      {:error, changeset} ->
-        render conn, "new.html", changeset: changeset
-    end
-  end
+  #     {:error, changeset} ->
+  #       render conn, "new.html", changeset: changeset
+  #   end
+  # end
 
   # def edit(conn, %{"id" => gist_id}) do
   #   gist = Repo.get(Gist, gist_id)

@@ -6,7 +6,7 @@ defmodule Gist.File do
     field :language, :string
     # field :body, :string
 
-    belongs_to :gist, Gist.Gist
+    belongs_to :gist, Gist.Gists
   end
 
   # struct represents a record in the db that we want to save

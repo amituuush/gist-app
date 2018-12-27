@@ -19,7 +19,18 @@ class Signup extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault();
-    console.log(this.state);
+
+    axios({
+      method: 'post',
+      headers: {"Content-Type": "application/json"},
+      url: 'http://localhost:4004/api/users',
+      data: {
+        users: {
+          username: this.state.username,
+          password: this.state.password
+        }
+      }
+    });
   }
 
   render() {

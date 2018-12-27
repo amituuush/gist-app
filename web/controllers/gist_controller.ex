@@ -5,11 +5,12 @@ defmodule Gist.GistController do
   # conn contains all info from the request (headers, body, cookies ,etc) and is what we respond with to the client
 
   def index(conn, _params) do
-    gists = Repo.all(Gists)
+    # gists = Repo.all(Gists)
     # gists = []
 
-    json conn, gists
+    # json conn, gists
     # render conn, "index.html", gists: gists
+    render conn, "index.html"
   end
 
   # def new(conn, _params) do

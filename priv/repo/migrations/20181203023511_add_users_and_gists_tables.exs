@@ -8,7 +8,8 @@ defmodule Gist.Repo.Migrations.AddUsersAndGistsTables do
       add :username, :string
       add :password, :string
       add :password_hash, :string
-      add :created_at, :utc_datetime
+
+      timestamps()
     end
 
     create unique_index(:users, [:user_id, :email, :username])
@@ -18,7 +19,8 @@ defmodule Gist.Repo.Migrations.AddUsersAndGistsTables do
       add :user_id, references(:users, column: :user_id, type: :uuid), null: false
       add :title, :string
       add :description, :string
-      add :created_at, :utc_datetime
+
+      timestamps()
     end
 
     create unique_index(:gists, [:gist_id, :user_id])

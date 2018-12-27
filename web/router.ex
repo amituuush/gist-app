@@ -17,6 +17,8 @@ defmodule Gist.Router do
     pipe_through :api
 
     get "/", GistController, :index
+    get "/users", UsersController, :index
+    post "/users", UsersController, :create
   end
 
   scope "/", Gist do

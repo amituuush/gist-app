@@ -19,7 +19,7 @@ defmodule Gist.Mixfile do
   def application do
     [mod: {Gist, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,7 +38,8 @@ defmodule Gist.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:poison, "~> 3.1"},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:plug_cowboy, "~> 2.0"},
+     {:comeonin, "~> 2.6"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-class Signup extends React.Component {
+class Login extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -21,18 +21,7 @@ class Signup extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault();
-
-    axios({
-      method: 'post',
-      headers: {"Content-Type": "application/json"},
-      url: 'http://localhost:4004/api/users',
-      data: {
-        users: {
-          username: this.state.username,
-          password: this.state.password
-        }
-      }
-    });
+    //authenticate user
   }
 
   render() {
@@ -46,7 +35,8 @@ class Signup extends React.Component {
                 className="input"
                 type="text"
                 value = {this.state.username}
-                onChange = {this.handleUsername.bind(this)} />
+                onChange = {this.handleUsername.bind(this)}
+              />
             </div>
           </div>
           <div className="field">
@@ -56,23 +46,26 @@ class Signup extends React.Component {
                 className="input"
                 type="text"
                 value = {this.state.password}
-                onChange = {this.handlePassword.bind(this)} />
+                onChange = {this.handlePassword.bind(this)}
+              />
             </div>
           </div>
           <button
             type="submit"
             value="Submit"
-            className="button is-primary">
+            className="button is-primary"
+          >
           Submit
           </button>
         </form>
         <Link
         className="button is-info"
-        to="/login" >
-          Login
+        to="/signup" >
+          Signup
         </Link>
       </div>
     );
   }
 }
-export default Signup;
+
+export default Login;

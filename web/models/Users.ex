@@ -20,7 +20,8 @@ defmodule Gist.Users do
     |> validate_required([:username, :password])
     |> unique_constraint(:username)
     |> validate_length(:password, min: 6, max: 20)
-    # |> put_password_hash
+    # TODO: get hashing working
+    # |> hash_pwd_salt
   end
 
   # struct represents a record in the db that we want to save

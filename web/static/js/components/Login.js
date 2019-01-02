@@ -21,7 +21,21 @@ class Login extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault();
-    //authenticate user
+
+    axios({
+      method: 'post',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      url: 'http://localhost:4000/api/sessions',
+      data: {
+          username: this.state.username,
+          password: this.state.password
+      }
+    })
+      .then((response) => {
+        console.log(response);
+      });
   }
 
   render() {

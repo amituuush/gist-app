@@ -10,13 +10,17 @@ defmodule Gist.UsersController do
   end
 
   def create(conn, %{"users" => users_params}) do
-    # create changeset
     changeset = Users.changeset(%Users{}, users_params)
-    # use changeset to insert a new row using params
+
     case Repo.insert(changeset) do
-      {:ok, _blogs} ->
-        users = Repo.all(Users)
-        render conn, "index.json", users: users
+      {:ok, _} ->
+        user = Repo.get_by(Users, username: username)
+        new_conn = Guardian.Plug.api_sign_in(conn, user, :access)
+        jwt = Guardian.Plug.current_token(new_conn)
+
+        new_conn
+        |> put_status(:created)
+        |> render(PhoenixUserAuthentication.SessionsView, "show.json", user: user, jwt: jwt)
     end
   end
 end

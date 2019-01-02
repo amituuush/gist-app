@@ -18,8 +18,7 @@ defmodule Gist.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Gist, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :phoenix_ecto, :postgrex, :comeonin, :guardian]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,7 +38,8 @@ defmodule Gist.Mixfile do
      {:poison, "~> 3.1"},
      {:gettext, "~> 0.11"},
      {:plug_cowboy, "~> 2.0"},
-     {:comeonin, "~> 2.6"}]
+     {:comeonin, "~> 2.6"},
+     {:guardian, "~> 0.14"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

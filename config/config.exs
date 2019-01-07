@@ -23,10 +23,10 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :guardian, Guardian,
-  issuer: "PhoenixUserAuthentication",
+  issuer: "Gist",
   ttl: {30, :days},
   verify_issuer: true,
-  serializer: PhoenixUserAuthentication.GuardianSerializer,
+  serializer: Gist.GuardianSerializer,
   secret_key: "syR5soTnDOp25yxyU4Y4rL/r0j4v/MNy/5l2gnjRcMwCx/UlWO88C28lWI0UrgJP"
 
 # Import environment specific config. This must remain at the bottom

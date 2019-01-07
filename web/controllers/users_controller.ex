@@ -1,5 +1,6 @@
 defmodule Gist.UsersController do
   use Gist.Web, :controller
+
   alias Gist.Users
 
   def index(conn, _params) do
@@ -13,14 +14,13 @@ defmodule Gist.UsersController do
     changeset = Users.changeset(%Users{}, users_params)
 
     case Repo.insert(changeset) do
-      {:ok, _} ->
-        user = Repo.get_by(Users, username: username)
+      {:ok, user} ->
         new_conn = Guardian.Plug.api_sign_in(conn, user, :access)
         jwt = Guardian.Plug.current_token(new_conn)
 
         new_conn
         |> put_status(:created)
-        |> render(PhoenixUserAuthentication.SessionsView, "show.json", user: user, jwt: jwt)
+        |> render(Gist.SessionsView, "show.json", user: user, jwt: jwt)
     end
   end
 end

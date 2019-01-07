@@ -1,13 +1,14 @@
 import React from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class Signup extends React.Component {
   constructor() {
     super();
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      redirect: false
     };
   }
 
@@ -34,11 +35,18 @@ class Signup extends React.Component {
       }
     })
     .then((response) => {
+      this.setState({ redirect: true });
       console.log(response);
     });
   }
 
   render() {
+    let { redirect } = this.state;
+
+    if (this.state.redirect) {
+      return <Redirect to={"/amit"} />;
+    }
+
     return (
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>

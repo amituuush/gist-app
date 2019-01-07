@@ -11,37 +11,36 @@ defmodule Gist.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug :accepts, ["json"]
     plug Guardian.Plug.VerifyHeader, realm: "Bearer"
     plug Guardian.Plug.LoadResource
+  end
+
+  scope "/", Gist do
+    pipe_through :browser # Use the default browser stack
+
+    get "/", GistController, :index
+    # get "/gists/new", GistController, :new
+    # post "/gists", GistController, :create
+    # get "/gists/:id/edit", GistController, :edit
+    # put "/gists/:id", GistController, :update
+
+    # resources "/", GistController
   end
 
   scope "/api", Gist do
     pipe_through :api
 
     get "/", GistController, :index
+
     get "/users", UsersController, :index
+
+    # new user sign up
     post "/users", UsersController, :create
-  end
 
-  scope "/", Gist do
-    pipe_through :browser # Use the default browser stack
-
-    # get "/", GistController, :index
-    # get "/gists/new", GistController, :new
-    # post "/gists", GistController, :create
-    # get "/gists/:id/edit", GistController, :edit
-    # put "/gists/:id", GistController, :update
-
-    resources "/", GistController
-  end
-
-  scope "/api", PhoenixUserAuthentication do
-    pipe_through :api
+    # user login
     post "/sessions", SessionsController, :create # login
-    delete "/sessions", SessionsController, :delete # log out
-    get "/users", UsersController, :index
-    post "/users", UsersController, :create
-  end
 
+    # user log out
+    delete "/sessions", SessionsController, :delete # log out
+  end
 end

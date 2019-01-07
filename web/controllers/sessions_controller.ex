@@ -1,7 +1,7 @@
-defmodule PhoenixUserAuthentication.SessionsController do
-  use PhoenixUserAuthentication.Web, :controller
+defmodule Gist.SessionsController do
+  use Gist.Web, :controller
 
-  alias PhoenixUserAuthentication.Users
+  alias Gist.Users
 
   def create(conn, %{"username" => username, "password" => password}) do
     case authenticate(%{"username" => username, "password" => password}) do
@@ -18,6 +18,14 @@ defmodule PhoenixUserAuthentication.SessionsController do
     end
   end
 
+  def delete(conn, _params) do
+    jwt = Guardian.Plug.current_token(conn)
+    Guardian.revoke(jwt)
+
+    conn
+    |> put_status(:ok)
+  end
+
   defp authenticate(%{"username" => username, "password" => password}) do
     user = Repo.get_by(Users, username: username)
     case check_password(user, password) do
@@ -30,13 +38,5 @@ defmodule PhoenixUserAuthentication.SessionsController do
 
   defp check_password(user, password) do
     Comeonin.Bcrypt.checkpw(password, user.password_hash)
-  end
-
-  def delete(conn, _params) do
-    jwt = Guardian.Plug.current_token(conn)
-    Guardian.revoke(jwt)
-
-    conn
-    |> put_status(:ok)
   end
 end

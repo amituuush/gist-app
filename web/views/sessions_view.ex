@@ -1,5 +1,5 @@
-defmodule PhoenixUserAuthentication.SessionsView do
-  use PhoenixUserAuthentication.Web, :view
+defmodule Gist.SessionsView do
+  use Gist.Web, :view
 
   def render("show.json", %{user: user, jwt: jwt}) do
     %{
@@ -10,7 +10,7 @@ defmodule PhoenixUserAuthentication.SessionsView do
 
   def user_data_json(user) do
     %{
-      id: user.id,
+      id: user.user_id,
       username: user.username
     }
   end

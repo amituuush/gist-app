@@ -11,19 +11,6 @@ class Login extends React.Component {
     };
   }
 
-  handleSubmit (event) {
-    event.preventDefault();
-
-    axios({
-      method: 'delete',
-      headers: {"Content-Type": "application/json"},
-      url: 'http://localhost:4004/api/sessions',
-    })
-    .then((response) => {
-      this.setState({ redirect: true });
-      console.log(response);
-    });
-  }
 
   render() {
     let { redirect } = this.state;
@@ -34,11 +21,7 @@ class Login extends React.Component {
 
     return (
       <div>
-        <button
-          onClick={this.handleSubmit.bind(this)}
-          className="button is-info" >
-          Logout
-        </button>
+        Gist Feed
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import AuthService from "./AuthService";
 import { Link, Redirect } from 'react-router-dom';
 
 class Signup extends React.Component {
@@ -34,9 +35,11 @@ class Signup extends React.Component {
         }
       }
     })
-    .then((response) => {
+    .then((res) => {
+      AuthService.setToken(res.data.meta.token)
+      console.log(res);
+      this.props.authUser();
       this.setState({ redirect: true });
-      console.log(response);
     });
   }
 

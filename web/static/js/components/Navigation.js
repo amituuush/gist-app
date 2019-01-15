@@ -1,18 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import AuthService from "./AuthService";
+
 
 class Navigation extends React.Component {
-  constructor() {
-    super();
-  }
-
   render() {
     return (
       <div className="nav">

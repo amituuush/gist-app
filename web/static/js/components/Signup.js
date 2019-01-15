@@ -44,7 +44,7 @@ class Signup extends React.Component {
     let { redirect } = this.state;
 
     if (this.state.redirect) {
-      return <Redirect to={"/amit"} />;
+      return <Redirect to={"/gists"} />;
     }
 
     return (

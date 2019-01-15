@@ -33,14 +33,9 @@ defmodule Gist.Router do
     get "/", GistController, :index
 
     get "/users", UsersController, :index
-
-    # new user sign up
     post "/users", UsersController, :create
 
-    # user login
     post "/sessions", SessionsController, :create # login
-
-    # user log out
     delete "/sessions", SessionsController, :delete # log out
   end
 end

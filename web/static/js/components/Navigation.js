@@ -1,12 +1,18 @@
 import React from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import AuthService from "./AuthService";
 
-
 class Navigation extends React.Component {
-  handleSubmit (event) {
+  constructor() {
+    super();
+    this.state = {
+      redirect: false
+    };
+  }
+
+  handleLogout (event) {
     event.preventDefault();
 
     axios({
@@ -16,17 +22,21 @@ class Navigation extends React.Component {
     })
     .then((response) => {
       AuthService.logout();
+      this.setState({ redirect: true });
       console.log(response);
     });
   }
 
   render() {
+    let { redirect } = this.state;
     let navLinks;
+
+    if (this.state.redirect) { return <Redirect to={"/"} />; }
 
     if (this.props.isAuthed) {
       navLinks = (
         <NavItem>
-          <NavLink href="/" onClick={this.handleSubmit.bind(this)}>
+          <NavLink href="/" onClick={this.handleLogout.bind(this)}>
               Logout
           </NavLink>
         </NavItem>

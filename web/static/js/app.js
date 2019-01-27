@@ -22,12 +22,14 @@ class App extends React.Component {
     this.setState({ isAuthed: true });
   }
 
+  // TODO: add hashhistory
+
   render() {
     return (
       <div>
-        <Navigation isAuthed={this.state.isAuthed} />
         <Router>
           <div>
+            <Navigation isAuthed={this.state.isAuthed} />
             <Route exact
               path="/"
               render={(props) => <Signup {...props} authUser={this.authUser} />} />

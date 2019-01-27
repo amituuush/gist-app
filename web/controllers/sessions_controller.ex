@@ -20,10 +20,10 @@ defmodule Gist.SessionsController do
 
   def delete(conn, _params) do
     jwt = Guardian.Plug.current_token(conn)
-    Guardian.revoke(jwt)
+    Guardian.revoke!(jwt)
 
     conn
-    |> put_status(:ok)
+    |> send_resp(200, "")
   end
 
   defp authenticate(%{"username" => username, "password" => password}) do

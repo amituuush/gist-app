@@ -45,10 +45,10 @@ class Navigation extends React.Component {
       navLinks = (
         <div>
           <NavItem>
-            <NavLink href="/components/">Sign Up</NavLink>
+          <Link to="/">Sign Up</Link>
           </NavItem>
           <NavItem>
-            <NavLink href="https://github.com/reactstrap/reactstrap">Log In</NavLink>
+            <Link to="/login">Login</Link>
           </NavItem>
         </div>
       );

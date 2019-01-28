@@ -1,13 +1,15 @@
 defmodule Gist.Users do
   use Gist.Web, :model
 
+  alias Comeonin.Bcrypt
+
   @primary_key {:user_id, :binary_id, autogenerate: true}
 
   schema "users" do
     field :username, :string, null: false
     field :email, :string, null: false
     field :password, :string, virtual: true
-    field :password_hash, :string, virtual: true
+    field :password_hash, :string
 
     has_many :gists, Gist.Gists
 
@@ -20,9 +22,18 @@ defmodule Gist.Users do
     |> validate_required([:username, :password])
     |> unique_constraint(:username)
     |> validate_length(:password, min: 6, max: 20)
+    |> validate_length(:username, min: 4, max: 20)
+    |> put_password_hash()
+    |> IO.inspect(label: "CHANGESET")
     # TODO: get hashing working
     # |> hash_pwd_salt
   end
+
+  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, password_hash: Bcrypt.hashpwsalt(password))
+  end
+
+  defp put_password_hash(changeset), do: changeset
 
   # struct represents a record in the db that we want to save
   # params contains the properties we want to update the struct with before we save to db

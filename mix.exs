@@ -38,7 +38,8 @@ defmodule Gist.Mixfile do
      {:poison, "~> 3.1"},
      {:gettext, "~> 0.11"},
      {:plug_cowboy, "~> 2.0"},
-     {:comeonin, "~> 2.6"},
+     {:comeonin, "~> 4.0"},
+     {:bcrypt_elixir, "~> 0.12"},
      {:guardian, "~> 0.14"}]
   end
 

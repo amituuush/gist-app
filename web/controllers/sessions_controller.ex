@@ -22,8 +22,7 @@ defmodule Gist.SessionsController do
     jwt = Guardian.Plug.current_token(conn)
     Guardian.revoke!(jwt)
 
-    conn
-    |> send_resp(200, "")
+    send_resp(conn, 200, "")
   end
 
   defp authenticate(%{"username" => username, "password" => password}) do

@@ -80,11 +80,6 @@ class Signup extends React.Component {
           Submit
           </button>
         </form>
-        <Link
-        className="button is-info"
-        to="/login" >
-          Login
-        </Link>
       </div>
     );
   }

@@ -30,6 +30,7 @@ class App extends React.Component {
         <Router>
           <div>
             <Navigation isAuthed={this.state.isAuthed} />
+
             <Route exact
               path="/"
               render={(props) => <Signup {...props} authUser={this.authUser} />} />

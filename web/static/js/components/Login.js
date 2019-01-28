@@ -72,11 +72,6 @@ class Login extends React.Component {
           Submit
           </button>
         </form>
-        <Link
-        className="button is-info"
-        to="/" >
-          Signup
-        </Link>
       </div>
     );
   }

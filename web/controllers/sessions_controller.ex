@@ -3,6 +3,12 @@ defmodule Gist.SessionsController do
 
   alias Gist.Users
 
+  # verified this method is working properly and users are able to sign in.
+  # next steps: complete user sign up/login/logout flow
+  # go through flow and see where it doesn't work (first step: redirect on login)
+  # making authenticated requests
+  # protected routes that need jwt to work
+  # add browserhistory, hashhistory for react-router
   def create(conn, %{"username" => username, "password" => password}) do
     case authenticate(%{"username" => username, "password" => password}) do
       {:ok, user} ->
@@ -36,6 +42,8 @@ defmodule Gist.SessionsController do
   defp check_password(nil, _), do: Comeonin.Bcrypt.dummy_checkpw()
 
   defp check_password(user, password) do
+    IO.inspect user, label: "USER"
+    IO.inspect password, label: "PASSWORD"
     Comeonin.Bcrypt.checkpw(password, user.password_hash)
   end
 end

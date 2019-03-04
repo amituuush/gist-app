@@ -1,7 +1,7 @@
 import React from "react";
-import AuthService from "./AuthService";
 import axios from "axios";
 import { Link, Redirect } from 'react-router-dom';
+import AuthService from "./AuthService";
 
 class Signup extends React.Component {
   constructor() {

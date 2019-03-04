@@ -35,22 +35,28 @@ class Navigation extends React.Component {
 
     if (this.props.isAuthed) {
       navLinks = (
-        <NavItem>
-          <NavLink onClick={this.handleLogout.bind(this)}>
-              Logout
-          </NavLink>
-        </NavItem>
+        <Nav className="ml-auto" navbar>
+          <NavItem>
+            <NavLink onClick={this.handleLogout.bind(this)}>
+                Logout
+            </NavLink>
+          </NavItem>
+        </Nav>
       );
     } else {
       navLinks = (
-        <div>
+        <Nav className="ml-auto" navbar>
           <NavItem>
-          <Link to="/">Sign Up</Link>
+            <NavLink>
+              <Link to="/">Sign Up</Link>
+            </NavLink>
           </NavItem>
           <NavItem>
-            <Link to="/login">Login</Link>
+            <NavLink>
+              <Link to="/login">Login</Link>
+            </NavLink>
           </NavItem>
-        </div>
+        </Nav>
       );
     }
 
@@ -58,9 +64,7 @@ class Navigation extends React.Component {
       <div className="nav">
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">Gist</NavbarBrand>
-            <Nav className="ml-auto" navbar>
-              {navLinks}
-            </Nav>
+          {navLinks}
         </Navbar>
       </div>
     );

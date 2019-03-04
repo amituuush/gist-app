@@ -19,6 +19,7 @@ defmodule Gist.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", GistController, :index
+    get "/*path", GistController, :index
     # get "/gists/new", GistController, :new
     # post "/gists", GistController, :create
     # get "/gists/:id/edit", GistController, :edit

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import AuthService from "./AuthService";
 
 class Login extends React.Component {
@@ -35,7 +35,7 @@ class Login extends React.Component {
           password: this.state.password
       }
     })
-    .then((response) => {
+    .then((res) => {
       AuthService.setToken(res.data.meta.token)
       console.log(res);
       this.props.authUser();

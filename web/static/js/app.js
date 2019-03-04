@@ -2,6 +2,7 @@ import "phoenix_html";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Gists from "./components/Gists";
@@ -22,8 +23,6 @@ class App extends React.Component {
     this.setState({ isAuthed: true });
   }
 
-  // TODO: add hashhistory
-
   render() {
     return (
       <div>
@@ -31,11 +30,11 @@ class App extends React.Component {
           <div>
             <Navigation isAuthed={this.state.isAuthed} />
 
-            <Route exact
-              path="/"
+            <Route exact path="/"
               render={(props) => <Signup {...props} authUser={this.authUser} />} />
-            <Route exact path="/gists" component={Gists}/>
-            <Route exact path="/login" component={Login}/>
+            <Route exact path="/login"
+              render={(props) => <Login {...props} authUser={this.authUser} />} />
+            <Route exact path="/gists" component={Gists} />
           </div>
         </Router>
       </div>
@@ -44,6 +43,8 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-  <App/>,
+  <BrowserRouter>
+    <App/>
+  </BrowserRouter>,
   document.getElementById("app")
 );

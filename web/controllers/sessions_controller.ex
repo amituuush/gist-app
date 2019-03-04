@@ -42,6 +42,7 @@ defmodule Gist.SessionsController do
 
   defp authenticate(%{"username" => username, "password" => password}) do
     user = Repo.get_by(Users, username: username)
+
     case check_password(user, password) do
       true -> {:ok, user}
       _ -> :error

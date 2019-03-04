@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link, Redirect } from 'react-router-dom';
+import { Alert } from 'reactstrap';
 import AuthService from "./AuthService";
 
 class Login extends React.Component {
@@ -9,7 +10,8 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
-      redirect: false
+      redirect: false,
+      failedLoginAttempt: false
     };
   }
 
@@ -40,12 +42,26 @@ class Login extends React.Component {
       console.log(res);
       this.props.authUser();
       this.setState({ redirect: true });
-    });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        this.setState({ failedLoginAttempt: true });
+      }
+    })
   }
 
   render() {
+    let failedAlert;
     if (this.state.redirect) {
       return <Redirect to={"/gists"} />;
+    }
+
+    if (this.state.failedLoginAttempt) {
+      failedAlert = (
+        <Alert color="warning" fade={false}>
+          That's an invalid username/password...try again!
+        </Alert>
+      )
     }
 
     return (
@@ -67,12 +83,13 @@ class Login extends React.Component {
             <div className="control">
               <input
                 className="input"
-                type="text"
+                type="password"
                 value = {this.state.password}
                 onChange = {this.handlePassword.bind(this)}
               />
             </div>
           </div>
+          {failedAlert}
           <button
             type="submit"
             value="Submit"

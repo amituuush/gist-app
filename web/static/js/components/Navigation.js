@@ -61,7 +61,7 @@ class Navigation extends React.Component {
     }
 
     return (
-      <div className="nav">
+      <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">Gist</NavbarBrand>
           {navLinks}

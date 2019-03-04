@@ -6,7 +6,7 @@ defmodule Gist.Users do
   @primary_key {:user_id, :binary_id, autogenerate: true}
 
   schema "users" do
-    field :username, :string, null: false
+    field :username, :string, null: false, unique: true
     field :email, :string, null: false
     field :password, :string, virtual: true
     field :password_hash, :string
@@ -24,9 +24,7 @@ defmodule Gist.Users do
     |> validate_length(:password, min: 6, max: 20)
     |> validate_length(:username, min: 4, max: 20)
     |> put_password_hash()
-    |> IO.inspect(label: "CHANGESET")
-    # TODO: get hashing working
-    # |> hash_pwd_salt
+    |> IO.inspect()
   end
 
   defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do

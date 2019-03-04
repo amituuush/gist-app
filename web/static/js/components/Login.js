@@ -1,13 +1,15 @@
 import React from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import AuthService from "./AuthService";
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      redirect: false
     };
   }
 
@@ -33,12 +35,19 @@ class Login extends React.Component {
           password: this.state.password
       }
     })
-      .then((response) => {
-        console.log(response);
-      });
+    .then((response) => {
+      AuthService.setToken(res.data.meta.token)
+      console.log(res);
+      this.props.authUser();
+      this.setState({ redirect: true });
+    });
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={"/gists"} />;
+    }
+
     return (
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>

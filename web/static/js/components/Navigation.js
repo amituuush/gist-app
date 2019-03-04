@@ -36,7 +36,7 @@ class Navigation extends React.Component {
     if (this.props.isAuthed) {
       navLinks = (
         <NavItem>
-          <NavLink href="/" onClick={this.handleLogout.bind(this)}>
+          <NavLink onClick={this.handleLogout.bind(this)}>
               Logout
           </NavLink>
         </NavItem>

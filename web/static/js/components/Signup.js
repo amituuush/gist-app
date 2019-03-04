@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
 import AuthService from "./AuthService";
+import axios from "axios";
 import { Link, Redirect } from 'react-router-dom';
 
 class Signup extends React.Component {
@@ -44,8 +44,6 @@ class Signup extends React.Component {
   }
 
   render() {
-    let { redirect } = this.state;
-
     if (this.state.redirect) {
       return <Redirect to={"/gists"} />;
     }

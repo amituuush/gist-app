@@ -9,18 +9,19 @@ defmodule Gist.SessionsController do
   # making authenticated requests
   # protected routes that need jwt to work
   # add browserhistory, hashhistory for react-router
+  # navigation disappearing after logout
+  # showing error messages on failed login or sign up
   def create(conn, %{"username" => username, "password" => password}) do
     case authenticate(%{"username" => username, "password" => password}) do
       {:ok, user} ->
         new_conn = Guardian.Plug.api_sign_in(conn, user, :access)
         jwt = Guardian.Plug.current_token(new_conn)
-
         new_conn
         |> put_status(:created)
         |> render("show.json", user: user, jwt: jwt)
       :error ->
         conn
-        |> put_status(:unauthorized)
+        |> send_resp(401, "")
     end
   end
 
@@ -42,8 +43,6 @@ defmodule Gist.SessionsController do
   defp check_password(nil, _), do: Comeonin.Bcrypt.dummy_checkpw()
 
   defp check_password(user, password) do
-    IO.inspect user, label: "USER"
-    IO.inspect password, label: "PASSWORD"
     Comeonin.Bcrypt.checkpw(password, user.password_hash)
   end
 end

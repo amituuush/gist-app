@@ -19,6 +19,14 @@ class App extends React.Component {
     this.authUser = this.authUser.bind(this);
   }
 
+  componentDidMount() {
+    debugger;
+    if (AuthService.isLoggedIn) {
+      console.log('IS LOGGED IN');
+      this.authUser();
+    }
+  }
+
   authUser() {
     this.setState({ isAuthed: true });
   }

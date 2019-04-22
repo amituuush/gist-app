@@ -26,6 +26,7 @@ class Login extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
 
+    // TODO: refactor to use AuthService.login
     axios({
       method: 'post',
       headers: {

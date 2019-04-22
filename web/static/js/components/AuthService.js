@@ -23,12 +23,6 @@ export default class AuthService {
     })
   }
 
-  loggedIn() {
-    // Checks if there is a saved token and it's still valid
-    const token = this.getToken() // GEtting token from localstorage
-    return !!token && !this.isTokenExpired(token) // handwaiving here
-  }
-
   isTokenExpired(token) {
     try {
       const decoded = decode(token);
@@ -53,6 +47,14 @@ export default class AuthService {
 
   static logout() {
     localStorage.removeItem('jwtToken');
+  }
+
+  static isLoggedIn() {
+    // Checks if there is a saved token and it's still valid
+    debugger;
+    const token = this.getToken() // Getting token from localstorage
+    console.log("token", token);
+    return !!token && !this.isTokenExpired(token) // handwaiving here
   }
 
   getProfile() {

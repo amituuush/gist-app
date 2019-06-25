@@ -3,22 +3,6 @@ defmodule Gist.SessionsController do
 
   alias Gist.Users
 
-  # BACKLOG
-  # making authenticated requests
-  # protected routes that need jwt to work
-  # navigation disappearing after logout
-  # showing error messages on failed login or sign up
-  # logged in user can refresh and is taken back to /gists
-
-  # IN PROGRESS
-  # complete user sign up/login/logout flow
-    # can currently create multiple users with the same username
-      #
-    # error feedback on failed login attempt
-
-  # DONE
-  # add browserhistory, hashhistory for react-router
-  # go through flow and see where it doesn't work (first step: redirect on login)
   def create(conn, %{"username" => username, "password" => password}) do
     case authenticate(%{"username" => username, "password" => password}) do
       {:ok, user} ->

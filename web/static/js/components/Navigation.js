@@ -23,7 +23,6 @@ class Navigation extends React.Component {
     .then((response) => {
       AuthService.logout();
       this.setState({ redirect: true });
-      console.log(response);
     });
   }
 

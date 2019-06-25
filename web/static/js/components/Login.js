@@ -40,7 +40,6 @@ class Login extends React.Component {
     })
     .then((res) => {
       AuthService.setToken(res.data.meta.token)
-      console.log(res);
       this.props.authUser();
       this.setState({ redirect: true });
     })

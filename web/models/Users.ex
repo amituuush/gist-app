@@ -17,14 +17,15 @@ defmodule Gist.Users do
   end
 
   def changeset(struct, params) do
+    # require IEx; IEx.pry
     struct
     |> cast(params, [:username, :password])
     |> validate_required([:username, :password])
-    |> unique_constraint(:username)
     |> validate_length(:password, min: 6, max: 20)
     |> validate_length(:username, min: 4, max: 20)
-    |> put_password_hash()
+    |> unique_constraint(:username)
     |> IO.inspect()
+    |> put_password_hash()
   end
 
   defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do

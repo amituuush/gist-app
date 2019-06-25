@@ -21,6 +21,11 @@ defmodule Gist.UsersController do
         new_conn
         |> put_status(:created)
         |> render(Gist.SessionsView, "show.json", user: user, jwt: jwt)
+
+      {:error, thing} ->
+        Log.error("broken")
+        IO.inspect thing, label: "thing"
+        IO.inspect thing2, label: "thing2"
     end
   end
 end
